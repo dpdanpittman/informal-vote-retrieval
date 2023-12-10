@@ -71,8 +71,9 @@ The script will generate ASCII tables like the following for each chain:
 | Chain               | Proposal ID   | Vote              | Status         |
 +---------------------+---------------+-------------------+----------------+
 | Qwoyn Network       | 13            | YES               | Voting Period  |
-| Qwoyn Network       | 14            | Not Voted         | Unknown Status |
+| Axelar              | 14            | Not Voted         | Unknown Status |
 | Osmosis             | 692           | YES               | Passed         |
+| ...                 |               |                   |                |
 +---------------------+---------------+-------------------+----------------+
 ```
 
