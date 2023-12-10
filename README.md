@@ -2,7 +2,7 @@
 
 ## Overview
 
-This script is designed to retrieve voting data for proposals on multiple blockchain networks and save it in an ASCII table format. It is especially useful for tracking and monitoring the voting status and outcomes of proposals on various chains.
+This app is designed to retrieve voting data for proposals on multiple blockchain networks and save it in an ASCII table format. It is especially useful for tracking and monitoring the voting status and outcomes of proposals on various chains.
 
 ## Features
 
