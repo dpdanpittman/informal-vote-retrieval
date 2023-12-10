@@ -1,10 +1,10 @@
 const axios = require('axios');
 const { checkAndStoreVote, handleVoteStatusError } = require('../utils/utils');
-const QWOYN_API_ENDPOINT = 'https://api.qwoyn.studio';
+const EVMOS_API_ENDPOINT = 'https://evmos-api.validatrium.club';
 
-async function getProposalsInVotingQwoyn() {
+async function getProposalsInVotingDYDX() {
     try {
-        const response = await axios.get(`${QWOYN_API_ENDPOINT}/cosmos/gov/v1beta1/proposals?proposal_status=PROPOSAL_STATUS_VOTING_PERIOD`);
+        const response = await axios.get(`${EVMOS_API_ENDPOINT}/cosmos/gov/v1beta1/proposals?proposal_status=2`);
         const result = response.data || {};
 
         if (!result.proposals) {
@@ -23,18 +23,18 @@ async function getProposalsInVotingQwoyn() {
     }
 }
 
-async function getVoteStatusQwoyn(proposalId, address) {
-    const uniqueId = `Qwoyn-${proposalId}`;
+async function getVoteStatusEvmos(proposalId, address) {
+    const uniqueId = `Evmos-${proposalId}`;
     try {
-        const url = `${QWOYN_API_ENDPOINT}/cosmos/gov/v1beta1/proposals/${proposalId}/votes/${address}`;
+        const url = `${EVMOS_API_ENDPOINT}/cosmos/gov/v1beta1/proposals/${proposalId}/votes/${address}`;
         const response = await axios.get(url);
         const voteData = response.data.vote || {};
 
         if (voteData.options && voteData.options.length > 0) {
             const voteOption = voteData.options[0].option.replace('VOTE_OPTION_', '').toUpperCase();
-            return checkAndStoreVote("Qwoyn", proposalId, voteOption);
+            return checkAndStoreVote("Evmos", proposalId, voteOption);
         } else {
-            return 'Note Voted';
+            return 'Not Voted';
         }
     } catch (error) {
         console.error(`Failed to get vote status for proposal ${proposalId}:`, error);
@@ -42,9 +42,9 @@ async function getVoteStatusQwoyn(proposalId, address) {
     }
 }
 
-async function getProposalStatusQwoyn(proposalId) {
+async function getProposalStatusEvmos(proposalId) {
     try {
-        const url = `${QWOYN_API_ENDPOINT}/cosmos/gov/v1beta1/proposals/${proposalId}`;
+        const url = `${EVMOS_API_ENDPOINT}/cosmos/gov/v1beta1/proposals/${proposalId}`;
         const response = await axios.get(url);
         const proposalData = response.data.proposal || {};
 
@@ -64,22 +64,22 @@ async function getProposalStatusQwoyn(proposalId) {
     }
 }
 
-async function getVotingDataQwoyn(votingData) {
-    const qwoynAddress = 'qwoyn1yatzmzt2954c2gq2k7cy4n7s9d9vz56ku3re5v';
-    const proposalsQwoyn = await getProposalsInVotingQwoyn();
-    const chainNameQwoyn = 'Qwoyn Network';
+async function getVotingDataEvmos(votingData) {
+    const evmosAddress = 'evmos10xhy8xurfwts9ckjkq0ga92mrjz9txyyh2g0t4'; // Replace with the actual address
+    const proposalsEvmos = await getProposalsInVotingDYDX();
+    const chainNameEvmos = 'Evmos';
 
-    for (const proposal of proposalsQwoyn) {
-        const voteStatusQwoyn = await getVoteStatusQwoyn(proposal.id, qwoynAddress);
-        const proposalStatusQwoyn = await getProposalStatusQwoyn(proposal.id);
+    for (const proposal of proposalsEvmos) {
+        const voteStatusEvmos = await getVoteStatusEvmos(proposal.id, evmosAddress);
+        const proposalStatusEvmos = await getProposalStatusEvmos(proposal.id);
 
         votingData.push({
-            Chain: chainNameQwoyn,
+            Chain: chainNameEvmos,
             'Proposal ID': proposal.id,
-            Vote: voteStatusQwoyn,
-            Status: proposalStatusQwoyn
+            Vote: voteStatusEvmos,
+            Status: proposalStatusEvmos
         });
     }
 }
 
-module.exports = { getVotingDataQwoyn };
+module.exports = { getVotingDataEvmos };

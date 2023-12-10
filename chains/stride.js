@@ -1,10 +1,10 @@
 const axios = require('axios');
 const { checkAndStoreVote, handleVoteStatusError } = require('../utils/utils');
-const QWOYN_API_ENDPOINT = 'https://api.qwoyn.studio';
+const STRIDE_API_ENDPOINT = 'http://mainnet.regen.network:1317';
 
-async function getProposalsInVotingQwoyn() {
+async function getProposalsInVotingStride() {
     try {
-        const response = await axios.get(`${QWOYN_API_ENDPOINT}/cosmos/gov/v1beta1/proposals?proposal_status=PROPOSAL_STATUS_VOTING_PERIOD`);
+        const response = await axios.get(`${STRIDE_API_ENDPOINT}/cosmos/gov/v1beta1/proposals?proposal_status=2`);
         const result = response.data || {};
 
         if (!result.proposals) {
@@ -23,18 +23,18 @@ async function getProposalsInVotingQwoyn() {
     }
 }
 
-async function getVoteStatusQwoyn(proposalId, address) {
-    const uniqueId = `Qwoyn-${proposalId}`;
+async function getVoteStatusStride(proposalId, address) {
+    const uniqueId = `Stride-${proposalId}`;
     try {
-        const url = `${QWOYN_API_ENDPOINT}/cosmos/gov/v1beta1/proposals/${proposalId}/votes/${address}`;
+        const url = `${STRIDE_API_ENDPOINT}/cosmos/gov/v1beta1/proposals/${proposalId}/votes/${address}`;
         const response = await axios.get(url);
         const voteData = response.data.vote || {};
 
         if (voteData.options && voteData.options.length > 0) {
             const voteOption = voteData.options[0].option.replace('VOTE_OPTION_', '').toUpperCase();
-            return checkAndStoreVote("Qwoyn", proposalId, voteOption);
+            return checkAndStoreVote("Regen", proposalId, voteOption);
         } else {
-            return 'Note Voted';
+            return 'Not Voted';
         }
     } catch (error) {
         console.error(`Failed to get vote status for proposal ${proposalId}:`, error);
@@ -42,9 +42,9 @@ async function getVoteStatusQwoyn(proposalId, address) {
     }
 }
 
-async function getProposalStatusQwoyn(proposalId) {
+async function getProposalStatusStride(proposalId) {
     try {
-        const url = `${QWOYN_API_ENDPOINT}/cosmos/gov/v1beta1/proposals/${proposalId}`;
+        const url = `${STRIDE_API_ENDPOINT}/cosmos/gov/v1beta1/proposals/${proposalId}`;
         const response = await axios.get(url);
         const proposalData = response.data.proposal || {};
 
@@ -64,22 +64,22 @@ async function getProposalStatusQwoyn(proposalId) {
     }
 }
 
-async function getVotingDataQwoyn(votingData) {
-    const qwoynAddress = 'qwoyn1yatzmzt2954c2gq2k7cy4n7s9d9vz56ku3re5v';
-    const proposalsQwoyn = await getProposalsInVotingQwoyn();
-    const chainNameQwoyn = 'Qwoyn Network';
+async function getVotingDataStride(votingData) {
+    const strideAddress = 'stride16k579jk6yt2cwmqx9dz5xvq9fug2tekver3f4n';
+    const proposalsStride = await getProposalsInVotingStride();
+    const chainNameStride = 'Stride';
 
-    for (const proposal of proposalsQwoyn) {
-        const voteStatusQwoyn = await getVoteStatusQwoyn(proposal.id, qwoynAddress);
-        const proposalStatusQwoyn = await getProposalStatusQwoyn(proposal.id);
+    for (const proposal of proposalsStride) {
+        const voteStatusStride = await getVoteStatusStride(proposal.id, strideAddress);
+        const proposalStatusStride = await getProposalStatusStride(proposal.id);
 
         votingData.push({
-            Chain: chainNameQwoyn,
+            Chain: chainNameStride,
             'Proposal ID': proposal.id,
-            Vote: voteStatusQwoyn,
-            Status: proposalStatusQwoyn
+            Vote: voteStatusStride,
+            Status: proposalStatusStride
         });
     }
 }
 
-module.exports = { getVotingDataQwoyn };
+module.exports = { getVotingDataStride };
