@@ -1,0 +1,12 @@
+Chain               |Proposal ID    |Vote                          |Status              |
+--------------------+---------------+------------------------------+--------------------+
+Cosmos Hub          |855            |Not Voted                     |Voting Period       |
+Cosmos Hub          |856            |Not Voted                     |Voting Period       |
+Cosmos Hub          |858            |Not Voted                     |Voting Period       |
+Cosmos Hub          |860            |Not Voted                     |Voting Period       |
+Qwoyn Network       |13             |YES                           |Voting Period       |
+Archway             |33             |Not Voted                     |Voting Period       |
+Archway             |34             |Not Voted                     |Voting Period       |
+Osmosis             |692            |YES                           |Passed              |
+Osmosis             |693            |Not Voted                     |Voting Period       |
+Osmosis             |694            |Not Voted                     |Voting Period       |
