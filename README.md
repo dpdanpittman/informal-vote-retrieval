@@ -1,4 +1,4 @@
-# Proposal Voting Data Retrieval Script
+# Proposal Voting Data Retrieval App
 
 ## Overview
 
