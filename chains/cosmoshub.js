@@ -8,7 +8,6 @@ async function getProposalsInVotingCosmos() {
         const result = response.data || {};
 
         if (!result.proposals) {
-            console.error('No proposals found in the output');
             return [];
         }
         return result.proposals.map(proposal => {
@@ -18,7 +17,6 @@ async function getProposalsInVotingCosmos() {
             };
         });
     } catch (error) {
-        console.error('Failed to get proposals:', error);
         return [];
     }
 }
@@ -37,7 +35,6 @@ async function getVoteStatusCosmos(proposalId, address) {
             return 'Not Voted';
         }
     } catch (error) {
-        console.error(`Failed to get vote status for proposal ${proposalId}:`, error);
         return handleVoteStatusError(uniqueId);
     }
 }
@@ -59,7 +56,6 @@ async function getProposalStatusCosmos(proposalId) {
                 return 'Unknown Status';
         }
     } catch (error) {
-        console.error(`Failed to get status for proposal ${proposalId}:`, error);
         return 'Unknown Status';
     }
 }

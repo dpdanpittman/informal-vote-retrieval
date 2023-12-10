@@ -1,6 +1,5 @@
 const fs = require('fs');
 const { getVotingDataCosmos } = require('./chains/cosmoshub');
-const { getVotingDataQwoyn } = require('./chains/qwoyn');
 const { getVotingDataAgoric } = require('./chains/agoric');
 const { getVotingDataArchway }= require('./chains/archway');
 const { getVotingDataOsmosis }= require('./chains/osmosis');
@@ -24,7 +23,6 @@ async function main() {
 
     // Fetch and process voting data for various chains
     await getVotingDataCosmos(votingData);
-    await getVotingDataQwoyn(votingData);
     await getVotingDataAgoric(votingData);
     await getVotingDataArchway(votingData);
     await getVotingDataOsmosis(votingData);

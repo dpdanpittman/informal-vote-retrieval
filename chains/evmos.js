@@ -37,7 +37,6 @@ async function getVoteStatusEvmos(proposalId, address) {
             return 'Not Voted';
         }
     } catch (error) {
-        console.error(`Failed to get vote status for proposal ${proposalId}:`, error);
         return handleVoteStatusError(uniqueId);
     }
 }

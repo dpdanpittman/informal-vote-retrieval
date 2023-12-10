@@ -16,7 +16,6 @@ async function getProposalStatusOsmosis(proposalId) {
                 return 'Unknown Status';
         }
     } catch (error) {
-        console.error(`Failed to get status for proposal ${proposalId}:`, error);
         throw error;
     }
 }
@@ -30,13 +29,12 @@ async function getVoteStatusOsmosis(proposalId, address) {
 
         const voteOption = voteData.option ? voteData.option.replace('VOTE_OPTION_', '').toUpperCase() : 'Not Voted';
 
-        if (['YES', 'NO', 'ABSTAIN'].includes(voteOption)) {
+        if (['YES', 'NO', 'ABSTAIN', 'NO WITH VETO'].includes(voteOption)) {
             return checkAndStoreVote("Osmosis", proposalId, voteOption);
         } else {
             return voteOption; // 'Not Voted' or other non-standard status
         }
     } catch (error) {
-        console.error(`Failed to get vote status for proposal ${proposalId}:`, error);
         return handleVoteStatusError(uniqueId);
     }
 }
@@ -64,7 +62,6 @@ async function getVotingDataOsmosis(votingData) {
 
             currentProposalId++;
         } catch (error) {
-            console.error(`Error processing proposal ${currentProposalId}:`, error);
             break;
         }
     }

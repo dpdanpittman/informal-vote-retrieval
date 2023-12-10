@@ -37,7 +37,6 @@ async function getVoteStatusStride(proposalId, address) {
             return 'Not Voted';
         }
     } catch (error) {
-        console.error(`Failed to get vote status for proposal ${proposalId}:`, error);
         return handleVoteStatusError(uniqueId);
     }
 }
@@ -59,7 +58,6 @@ async function getProposalStatusStride(proposalId) {
                 return 'Unknown Status';
         }
     } catch (error) {
-        console.error(`Failed to get status for proposal ${proposalId}:`, error);
         return 'Unknown Status';
     }
 }

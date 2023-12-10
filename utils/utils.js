@@ -12,12 +12,10 @@ const initialVotesPath = path.join(currentDir, '../data/initialVotes.json');
 async function runCommand(command) {
     return new Promise((resolve, reject) => {
         exec(command, (error, stdout, stderr) => {
-            if (error) {
-                console.error(`Error: ${error.message}`);
+            if (error) {;
                 return reject(error);
             }
             if (stderr) {
-                console.error(`Stderr: ${stderr}`);
                 return reject(stderr);
             }
             resolve(stdout);
@@ -42,7 +40,7 @@ function checkAndStoreVote(chainName, proposalId, voteOption) {
         if (storedVotes[uniqueId] !== voteOption) {
             console.error(`Vote change detected for ${uniqueId}. Stored: ${storedVotes[uniqueId]}, Current: ${voteOption}`);
         }
-    } else if (['YES', 'NO', 'ABSTAIN'].includes(voteOption)) {
+    } else if (['YES', 'NO', 'ABSTAIN', `NO WITH VETO`].includes(voteOption)) {
         storedVotes[uniqueId] = voteOption;
         fs.writeFileSync(initialVotesPath, JSON.stringify(storedVotes), 'utf8');
     }
@@ -54,10 +52,8 @@ function checkAndStoreVote(chainName, proposalId, voteOption) {
 function handleVoteStatusError(uniqueId) {
     const storedVotes = JSON.parse(fs.readFileSync(initialVotesPath, 'utf8'));
     if (storedVotes.hasOwnProperty(uniqueId)) {
-        console.log(`Using stored vote for ${uniqueId}: ${storedVotes[uniqueId]}`);
         return storedVotes[uniqueId];
     } else {
-        console.error(`Error and no stored vote for ${uniqueId}`);
         return 'Not Voted';
     }
 }
