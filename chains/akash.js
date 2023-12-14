@@ -1,6 +1,6 @@
 const axios = require('axios');
 const { checkAndStoreVote, handleVoteStatusError } = require('../utils/utils');
-const AKASH_API_ENDPOINT = 'https://api-akash.cosmos-spaces.cloud';
+const AKASH_API_ENDPOINT = 'https://api.akash.forbole.com';
 
 async function getProposalsInVotingAkash() {
     try {

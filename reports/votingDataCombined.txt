@@ -1,14 +1,20 @@
 Chain               |Proposal ID    |Vote                          |Status              |
 --------------------+---------------+------------------------------+--------------------+
-Cosmos Hub          |855            |Not Voted                     |Voting Period       |
-Cosmos Hub          |856            |Not Voted                     |Voting Period       |
+Cosmos Hub          |856            |NO                            |Voting Period       |
 Cosmos Hub          |858            |Not Voted                     |Voting Period       |
 Cosmos Hub          |860            |Not Voted                     |Voting Period       |
-Archway             |33             |Not Voted                     |Voting Period       |
+Cosmos Hub          |861            |Not Voted                     |Voting Period       |
+Cosmos Hub          |862            |Not Voted                     |Unknown Status      |
+Archway             |33             |NO                            |Voting Period       |
 Archway             |34             |Not Voted                     |Voting Period       |
+Archway             |35             |Not Voted                     |Voting Period       |
 Osmosis             |692            |YES                           |Passed              |
-Osmosis             |693            |Not Voted                     |Voting Period       |
-Osmosis             |694            |Not Voted                     |Voting Period       |
-Evmos               |255            |NO_WITH_VETO                  |Voting Period       |
-Evmos               |256            |Not Voted                     |Voting Period       |
-Evmos               |258            |Not Voted                     |Voting Period       |
+Osmosis             |693            |Not Voted                     |Passed              |
+Osmosis             |694            |NO                            |Voting Period       |
+Osmosis             |695            |Not Voted                     |Voting Period       |
+Osmosis             |696            |Not Voted                     |Voting Period       |
+Osmosis             |697            |Not Voted                     |Voting Period       |
+Axelar              |190            |Not Voted                     |Voting Period       |
+Juno                |326            |Not Voted                     |Voting Period       |
+Medibloc            |14             |Not Voted                     |Voting Period       |
+Quicksilver         |14             |Not Voted                     |Voting Period       |
